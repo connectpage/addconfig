@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectTo = urlParams.get('redirect_to');
+            
+            if (redirectTo) {
+                window.location.href = redirectTo;
+            } else {
+                document.body.innerHTML = '<h1>Ошибка: отсутствует параметр redirect_to</h1>';
+            }
+        };
+    </script>
+</head>
+<body>
+    <p>Перенаправляем...</p>
+</body>
+</html>
