@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Перенаправление...</title>
+    <title>Подключение устройства</title>
     <style>
         body {
             display: flex;
@@ -29,31 +29,53 @@
             border-top: 4px solid #007bff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            display: none;
         }
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
     </style>
     <script>
-        window.onload = function() {
+        function startRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const redirectTo = urlParams.get('redirect_to');
+            const message = document.getElementById("message");
+            const spinner = document.getElementById("spinner");
+            const button = document.getElementById("redirectButton");
             
             if (redirectTo) {
+                message.innerText = "Перенаправление...";
+                spinner.style.display = "block";
+                button.style.display = "none";
                 setTimeout(() => {
                     window.location.href = redirectTo;
                 }, 2000);
             } else {
-                document.getElementById("message").innerText = "Ошибка: отсутствует параметр redirect_to";
+                message.innerText = "Ошибка: отсутствует параметр redirect_to";
             }
-        };
+        }
     </script>
 </head>
 <body>
     <div class="container">
-        <h2 id="message">Перенаправляем...</h2>
-        <div class="spinner"></div>
+        <h2 id="message">Для автоматического подключения нажмите кнопку</h2>
+        <button id="redirectButton" class="button" onclick="startRedirect()">Подключить устройство</button>
+        <div id="spinner" class="spinner"></div>
     </div>
 </body>
 </html>
